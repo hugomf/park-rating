@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 const TableList = () => {
-  const [posts, setPosts] = useState([]);
+  const [table, setTable] = useState([]);
+  // Require and initialize outside of your main handler
 
-  useEffect(() => {
-    // Require and initialize outside of your main handler
+  const fetchTable = async () => {
     const mysql = require("serverless-mysql")({
       config: {
         host: "dbpark.cluster-cz9969zbnjpk.us-east-2.rds.amazonaws.com",
@@ -14,23 +14,17 @@ const TableList = () => {
       }
     });
 
-    // Main handler function
-    exports.handler = async (event, context) => {
-      // Run your query
-      let results = await mysql.query("SELECT * FROM User_Rating");
-      setPosts(results);
+    let results = await mysql.query("SELECT * FROM User_Rating");
+    setTable(results);
+    await mysql.end();
+    return results;
+  };
 
-      // Run clean up function
-      await mysql.end();
-
-      // Return the results
-      return results;
-    };
-  }, [setPosts]);
+  useEffect(() => fetchTable(), [setTable]);
 
   return (
     <div>
-      {posts.map(item => (
+      {table.map(item => (
         <div>
           <h3>{item.title}</h3>
         </div>
