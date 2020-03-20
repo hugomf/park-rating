@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const TableList = () => {
-  const [posts, setPosts] = useState;
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // Require and initialize outside of your main handler
@@ -26,7 +26,7 @@ const TableList = () => {
       // Return the results
       return results;
     };
-  });
+  }, [setPosts]);
 
   return (
     <div>
