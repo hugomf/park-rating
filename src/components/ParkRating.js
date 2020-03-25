@@ -12,6 +12,30 @@ class ParkRating extends React.Component {
 
   onStarClick(nextValue, prevValue, name) {
     this.setState({ rating: nextValue });
+    this.insertRating(this.props.user, this.props.title, nextValue);
+  }
+
+  insertRating(user, parkTitle, rating) {
+    console.log(
+      "user:" + user + ", parkTitle:" + parkTitle + ", rating:" + rating
+    );
+    fetch(" https://ch2xtsnf45.execute-api.us-east-2.amazonaws.com/Dev/", {
+      method: "POST",
+      body: JSON.stringify({
+        user,
+        parkTitle,
+        rating
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        console.log(json);
+      });
   }
 
   render() {

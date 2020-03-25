@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import * as contentful from "contentful";
 import ParkRating from "./ParkRating";
 import RichTextToReact from "rich-text-to-react";
+import { useAuth0 } from "../react-auth0-spa";
+import Loading from "../components/Loading";
 
 const ParkList = () => {
   const [posts, setPosts] = useState([]);
+  const { loading, user } = useAuth0();
 
   useEffect(() => {
     const client = contentful.createClient({
@@ -24,12 +27,16 @@ const ParkList = () => {
     });
   }, [setPosts]);
 
+  if (loading || !user) {
+    return <Loading />;
+  }
+
   return (
     <div>
       {posts.map(item => (
-        <div>
+        <div key={item.title}>
           <h3>{item.title}</h3>
-          <ParkRating />
+          <ParkRating user={user.email} title={item.title} />
           <img src={item.parkImages[0].fields.file.url} alt={item.title} />
           <RichTextToReact document={item.description} />
           <hr />
