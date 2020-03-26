@@ -1,0 +1,9 @@
+{
+  "auth0_domain": "aztekcoder.auth0.com",
+  "auth0_clientId": "JyliQSpEsDiinZo6aJKhnsYIlfH5gRSh",
+
+  "contentful_space": "ybdzwdfm9wam",
+  "contentful_accessToken": "xUK7DNhIkRFNcaOZDzkJGZdmOmQOjG3s9Fi7TSH8CYQ",
+
+  "lambda_updateParkRatingsUrl": "https://ch2xtsnf45.execute-api.us-east-2.amazonaws.com/Dev/"
+}

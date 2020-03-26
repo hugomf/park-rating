@@ -4,6 +4,7 @@ import ParkRating from "./ParkRating";
 import RichTextToReact from "rich-text-to-react";
 import { useAuth0 } from "../react-auth0-spa";
 import Loading from "../components/Loading";
+import config from "../app_config.json";
 
 const ParkList = () => {
   const [posts, setPosts] = useState([]);
@@ -11,8 +12,8 @@ const ParkList = () => {
 
   useEffect(() => {
     const client = contentful.createClient({
-      space: "ybdzwdfm9wam",
-      accessToken: "xUK7DNhIkRFNcaOZDzkJGZdmOmQOjG3s9Fi7TSH8CYQ"
+      space: config.contentful_space,
+      accessToken: config.contentful_accessToken
     });
 
     client.getEntries().then(entries => {

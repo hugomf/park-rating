@@ -1,5 +1,6 @@
 import React from "react";
 import Stars from "react-star-rating-component";
+import config from "../app_config.json";
 
 class ParkRating extends React.Component {
   constructor() {
@@ -19,7 +20,7 @@ class ParkRating extends React.Component {
     console.log(
       "user:" + user + ", parkTitle:" + parkTitle + ", rating:" + rating
     );
-    fetch(" https://ch2xtsnf45.execute-api.us-east-2.amazonaws.com/Dev/", {
+    fetch(config.lambda_updateParkRatingsUrl, {
       method: "POST",
       body: JSON.stringify({
         user,
