@@ -1,1 +1,1 @@
-# park-rating
+# park-rating kata
